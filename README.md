@@ -1,5 +1,7 @@
 # Feedforward Neural Network
 
+## Training v.1
+
 0 - 100 Epochs
 
 |      Epoch      |    Progress    |      Loss      |         Time         |
