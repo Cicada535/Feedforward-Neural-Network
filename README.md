@@ -46,9 +46,9 @@
 
 ## Training v.2
 
-| input_size | output_size |  lr   | weight_decay | patience | factor | fc1 | fc2 | dropout | torch.randn | torch.randint | batch_size | shuffle | total trainings |
-| ---------- | ----------- | ----- | ------------ | -------- | ------ | --- | --- | ------- | ----------- | ------------- | ---------- | ------- | --------------- |
-|     5      |      10     |0.0001 |     1e-5     |     5    |   0.5  | 256 | 256 |  0.2    |   1000, 5   |0, 10, (1000,) |     64     |   True  |       14        |
+| input_size | output_size |    lr    | weight_decay | patience | factor | fc1   | fc2   |dropout| torch.randn | torch.randint | batch_size | shuffle | total trainings |
+| ---------- | ----------- | -------- | ------------ | -------- | ------ | ----- | ----- | ----- | ----------- | ------------- | ---------- | ------- | --------------- |
+|     5      |      10     |**0.0001**|   **1e-5**   |  **5**   |**0.5** |**256**|**256**|**0.2**|   1000, 5   |0, 10, (1000,) |   **64**   |   True  |     **14**      |
 
 
 | № of training | total Epochs |
