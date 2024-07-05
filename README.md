@@ -111,16 +111,11 @@
 
 ## Использованные библиолтеки и версия Python
 
-Python = 3.10.0
-
-time:
-`pip install time`
-
-logging:
-`pip install logging`
-
-torch:
-`pip install torch`
+> [!IMPORTANT]
+> Python = 3.10.0
+> time: `pip install time`
+> logging: `pip install logging`
+> torch: `pip install torch`
 
 [^1]: Основано на геометрической прогрессии эпох и уменьшении шага обучения по формуле `learning_rate_10 = 0.1 * exp(-0.01 * 10) ≈ 0.0905`[^2]
 [^2]: Где **learning_rate_t** - шаг обучения на этапе **t**; **learning_rate_0** - начальный шаг обучения; **decay_rate** - скорость уменьшения шага обучения (обычно небольшое положительное число); **t** - номер текущего этапа обучения
