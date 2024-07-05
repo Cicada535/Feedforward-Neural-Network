@@ -28,15 +28,21 @@ class MyDataset(Dataset):
 class MyModel(nn.Module):
     def __init__(self, input_size, output_size):
         super(MyModel, self).__init__()
-        self.fc1 = nn.Linear(input_size, 128)
+        self.fc1 = nn.Linear(input_size, 256)  # Увеличение размера скрытого слоя
         self.relu = nn.ReLU()
-        self.fc2 = nn.Linear(128, output_size)
+        self.dropout = nn.Dropout(p=0.2)  # Добавление Dropout
+        self.fc2 = nn.Linear(256, output_size)
 
     def forward(self, x):
         x = self.fc1(x)
         x = self.relu(x)
+        x = self.dropout(x)  # Применение Dropout
         x = self.fc2(x)
         return x
+
+# Загрузка модели
+model = MyModel(input_size=5, output_size=10)
+model.load_state_dict(torch.load(f'Model-FNN.pth'))
 
 # Загрузка данных
 data = torch.randn(1000, 5)  # Пример случайных данных
@@ -46,27 +52,27 @@ labels = torch.randint(0, 10, (1000,))  # Пример случайных мет
 dataset = MyDataset(data, labels)
 
 # Создание загрузчика данных
-dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+dataloader = DataLoader(dataset, batch_size=64, shuffle=True) # Увеличение batch size
 
 # Создание модели
 model = MyModel(input_size=5, output_size=10)
 
 # Определение оптимизатора
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+optimizer = optim.Adam(model.parameters(), lr=0.0001, weight_decay=1e-5)
 
 # Определение функции потерь
 criterion = nn.CrossEntropyLoss()
 
-# Определение планировщика обучения с уменьшением шага
-scheduler = ReduceLROnPlateau(optimizer, 'min', patience=5, factor=0.1)
+# Определение планировщика обучения
+scheduler = ReduceLROnPlateau(optimizer, 'min', patience=3, factor=0.5)
 
 # Обучение модели
-epochs = 1000000001
-patience = 10
+epochs = 1000
+patience = 5
 best_loss = float('inf')
 epoch_without_improvement = 0
 
-logging.basicConfig(level=logging.INFO, filename='test.log',filemode='w', format="%(asctime)s %(levelname)s %(message)s")
+logging.basicConfig(level=logging.NOTSET, filename='test.log',filemode='w', format="%(asctime)s %(levelname)s %(message)s")
 logging.info('Training log:')
 logging.info('----------------')
 
@@ -86,6 +92,10 @@ for epoch in range(epochs):
 
         # Обновление весов
         optimizer.step()
+        
+        # Инициализация весов
+        nn.init.xavier_uniform_(model.fc1.weight)
+        nn.init.xavier_uniform_(model.fc2.weight)
 
         # Раннее прекращение 
         if loss.item() < best_loss:
@@ -94,9 +104,9 @@ for epoch in range(epochs):
         else:
             epoch_without_improvement += 1
             if epoch_without_improvement >= patience:
-                logging.basicConfig(level=logging.INFO, filename='test.log',filemode='w', format="%(asctime)s %(levelname)s %(message)s")
-                logging.warning(f'Early termination of education at the epoch: {epoch}.')
-                logging.warning('---------------------------------------------------')
+                logging.basicConfig(level=logging.NOTSET, filename='test.log', filemode='w', format="%(asctime)s %(levelname)s %(message)s")
+                logging.debug(f'Early termination of education at the epoch: {epoch}.')
+                logging.debug('---------------------------------------------------')
                 break  # Остановка обучения
 
         # Обновление шага обучения
@@ -106,10 +116,10 @@ for epoch in range(epochs):
         if batch_idx % 10 == 0:
             t = time.strftime('%d/%m/%Y, %H:%M:%S', time.localtime())
             print(f'{epoch}\t\t [{batch_idx * len(data)}/{len(dataloader.dataset)}]\t {loss.item():.6f}    {t}')
-            logging.basicConfig(level=logging.INFO, filename='test.log',filemode='w', format="%(asctime)s %(levelname)s %(message)s")
+            logging.basicConfig(level=logging.NOTSET, filename='test.log', filemode='w', format="%(asctime)s %(levelname)s %(message)s")
             logging.info('------------------------------------------')
             logging.info(f'Epoch: {epoch} [{batch_idx * len(data)}/{len(dataloader.dataset)}]\t Loss: {loss.item():.6f}')
             logging.info('------------------------------------------')
 
 # Сохранение модели
-torch.save(model.state_dict(), 'model.pth')
+torch.save(model.state_dict(), f'Model-FNN.pth')
