@@ -41,7 +41,7 @@
 
 ## Training v.1
 
-### Гиперпараметры нейросети (v.1):
+### Гиперпараметры нейросети:
 
 | input_size | output_size |  lr   | weight_decay | patience | factor | fc1 | fc2 | dropout | torch.randn | torch.randint | batch_size | shuffle | total trainings |
 | ---------- | ----------- | ----- | ------------ | -------- | ------ | --- | --- | ------- | ----------- | ------------- | ---------- | ------- | --------------- |
@@ -89,7 +89,7 @@
 
 ## Training v.2
 
-### Гиперпараметры нейросети (v.2):
+### Гиперпараметры нейросети:
 
 | input_size | output_size |    lr    | weight_decay | patience | factor | fc1   | fc2   |dropout| torch.randn | torch.randint | batch_size | shuffle | total trainings |
 | ---------- | ----------- | -------- | ------------ | -------- | ------ | ----- | ----- | ----- | ----------- | ------------- | ---------- | ------- | --------------- |
