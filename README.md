@@ -2,10 +2,10 @@
 
 ## Training v.1
 
-| input_size | output_size |  lr   | patience | factor | fc1 | fc2 | dropout | torch.randn | torch.randint | batch_size | shuffle | total trainings |
-| ---------- | ----------- | ----- | -------- | ------ | --- | --- | ------- | ----------- | ------------- | ---------- | ------- | --------------- |
-|     5      |      10     | 0.001 |     5    |   0.1  | 128 | 128 |  None   |   1000, 5   |0, 10, (1000,) |     32     |   True  |        3        |
-  
+| input_size | output_size |  lr   | weight_decay | patience | factor | fc1 | fc2 | dropout | torch.randn | torch.randint | batch_size | shuffle | total trainings |
+| ---------- | ----------- | ----- | ------------ | -------- | ------ | --- | --- | ------- | ----------- | ------------- | ---------- | ------- | --------------- |
+|     5      |      10     | 0.001 |     None     |    10    |   0.1  | 128 | 128 |  None   |   1000, 5   |0, 10, (1000,) |     32     |   True  |        3        |
+
 0 - 100 Epochs
 
 |      Epoch      |    Progress    |      Loss      |         Time         |
@@ -42,3 +42,9 @@
 |        130731   |    [0/1000]    |    2.176197    | 05/07/2024, 19:00:18 |
 |        176348   |    [0/1000]    |    2.173238    | 05/07/2024, 19:02:52 |
 |        274047   |    [0/1000]    |    2.155731    | 05/07/2024, 19:08:08 |
+
+## Training v.2
+
+| input_size | output_size |  lr   | weight_decay | patience | factor | fc1 | fc2 | dropout | torch.randn | torch.randint | batch_size | shuffle | total trainings |
+| ---------- | ----------- | ----- | ------------ | -------- | ------ | --- | --- | ------- | ----------- | ------------- | ---------- | ------- | --------------- |
+|     5      |      10     |0.0001 |     1e-5     |     5    |   0.5  | 256 | 256 |  0.2    |   1000, 5   |0, 10, (1000,) |     64     |   True  |       14        |
