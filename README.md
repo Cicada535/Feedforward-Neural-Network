@@ -35,7 +35,7 @@
 ## Использованные библиолтеки и версия Python
 
 > [!IMPORTANT]
-> **Python = 3.10.0**  **|**  **time:** `pip install time`  **|**  **logging:** `pip install logging`  **|**  **torch:** `pip install torch`
+> **Python = 3.10.0**  |  **time:** `pip install time`  |  **logging:** `pip install logging`  |  **torch:** `pip install torch`
 
 # Процесс обучения FNN
 
